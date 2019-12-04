@@ -3,27 +3,27 @@ A File/Directory diff-like comparison tool with HTML output.
 
 This program can be use to compare files and directories for differences.
 When comparing directories, it iterates through all files in both directories
-and compare files having the same name.
+and compares files having the same name.
 
 See example output [here:](http://raw.githack.com/spcau/godiff/master/example.html)
 
 ##How to use godiff
 
 	godiff file1 file2 > results.html
-	godiff directory1 directory > results.html
+	godiff directory1 directory2 > results.html
 
 See `godiff -h` for all the available command line options
 
 ##Features
 
-* When comparing two directory, place all the differences into a single html file.
+* When comparing two directories, place all the differences into a single html file.
 * Supports UTF8 file.
-* Show differences within a line
+* Show differences within a line.
 * Options for ignore case, white spaces compare, blank lines etc.
 
 ##Description
 
-I need a program to to compare 2 directories, and report differences in all
+I need a program to compare 2 directories, and report differences in all
 files. Much like gnudiff, but with a nicer output. And I also like to try out
 the go programming language, so I created __godiff__.
 
