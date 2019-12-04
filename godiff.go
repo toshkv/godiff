@@ -80,7 +80,7 @@ const (
 	// convenient shortcut
 	PATH_SEPARATOR = string(os.PathSeparator)
 
-	// use mmap for file greather than this size, for smaller files just use Read() instead.
+	// use mmap for file greater than this size, for smaller files just use Read() instead.
 	MMAP_THRESHOLD = 8 * 1024
 
 	// Number of lines to print for previewing file
@@ -267,7 +267,7 @@ func usage(msg string) {
 	if msg != "" {
 		fmt.Fprintf(os.Stderr, "%s\n", msg)
 	}
-	fmt.Fprint(os.Stderr, "A text file comparison tool displaying differenes in HTML\n\n")
+	fmt.Fprint(os.Stderr, "A text file comparison tool displaying differences in HTML\n\n")
 	fmt.Fprint(os.Stderr, "usage: godiff <options> <file|dir> <file|dir>\n")
 	flag.PrintDefaults()
 	os.Exit(2)
@@ -317,7 +317,7 @@ func main() {
 	if flag_exclude_files != "" {
 		r, err := regexp.Compile(flag_exclude_files)
 		if err != nil {
-			usage("Invlid exclude regex: " + err.Error())
+			usage("Invalid exclude regex: " + err.Error())
 		}
 		regexp_exclude_files = r
 	}
@@ -425,7 +425,7 @@ func next_change_segment(start int, change []bool, data []int) (int, int, int) {
 		end++
 	}
 
-	// skip blank lines in the begining and end of the changes
+	// skip blank lines in the beginning and end of the changes
 	i, j := start, end
 	for i < end && data[i] == 0 {
 		i++
@@ -879,8 +879,8 @@ func (chg *DiffChangerHtml) diff_lines(ops []DiffOp) {
 
 					if change1 != nil {
 						// perform shift boundaries, to make the changes more readable
-						shift_boundaries(cmp1, change1, rune_bouundary_score)
-						shift_boundaries(cmp2, change2, rune_bouundary_score)
+						shift_boundaries(cmp1, change1, rune_boundary_score)
+						shift_boundaries(cmp2, change2, rune_boundary_score)
 
 						write_html_line_change(&chg.buf1, line1, pos1, change1)
 						write_html_line_change(&chg.buf2, line2, pos2, change2)
@@ -1447,7 +1447,7 @@ func find_equiv_lines(lines1, lines2 [][]byte) (*LinesData, *LinesData) {
 	return &info1, &info2
 }
 
-// Count the occurrances of each unique ids in both sets of lines, we will then know which lines are only present in one file, but not the other.
+// Count the occurrences of each unique ids in both sets of lines, we will then know which lines are only present in one file, but not the other.
 // Remove chunks of lines that do not appear in the other files, and replace with a single entry
 // Return compressed lists of ids and a list indicating where are the chunk of lines being replaced
 func compress_equiv_ids(lines1, lines2 *LinesData, max_id1, max_id2 int) {
@@ -1463,7 +1463,7 @@ func compress_equiv_ids(lines1, lines2 *LinesData, max_id1, max_id2 int) {
 		has_ids2[v] = true
 	}
 
-	// exclude lines from the begining that are identical in both files
+	// exclude lines from the beginning that are identical in both files
 	// if line in file1 but not in file2, exclude it and marked as changed
 	// if line in file2 but not in file1, exclude it and marked as changed
 	i1, i2 := 0, 0
@@ -1520,7 +1520,7 @@ func compress_equiv_ids(lines1, lines2 *LinesData, max_id1, max_id2 int) {
 		return
 	}
 
-	// store excluded lines from begining and end of file
+	// store excluded lines from beginning and end of file
 	lines1.zids_start, lines1.zids_end = i1, j1
 	lines2.zids_start, lines2.zids_end = i2, j2
 
@@ -1583,7 +1583,7 @@ func compress_equiv_ids(lines1, lines2 *LinesData, max_id1, max_id2 int) {
 
 //
 // Do the reverse of the compress_equiv_ids.
-// zllines1 and zlines2 contains the 'extra' lines each entry represents.
+// zlines1 and zlines2 contains the 'extra' lines each entry represents.
 //
 func expand_change_list(info1, info2 *LinesData, zchange1, zchange2 []bool) {
 
@@ -1946,7 +1946,7 @@ func diff_file(filename1, filename2 string, finfo1, finfo2 os.FileInfo) {
 		// Compute equiv ids for each line.
 		info1, info2 := find_equiv_lines(lines1, lines2)
 
-		// No zids avaiable, no need to run diff comparision algorithm
+		// No zids available, no need to run diff comparison algorithm
 		// The find_equiv_lines() function may have perform the comparison already.
 		if info1.zids != nil && info2.zids != nil {
 			// run the diff algorithm
@@ -2207,7 +2207,7 @@ func rune_edge_score(r rune) int {
 }
 
 // scoring character boundary, for finding a change chunk that is easier to read
-func rune_bouundary_score(r1, r2 int) int {
+func rune_boundary_score(r1, r2 int) int {
 
 	s1 := rune_edge_score(rune(r1))
 	s2 := rune_edge_score(rune(r2))
@@ -2243,7 +2243,7 @@ func shift_boundaries(data []int, change []bool, boundary_score func(int, int) i
 		case up > 0 && up_merge:
 			// shift up, merged with previous chunk of changes
 			do_shift_boundary(start, end, -up, change)
-			// restart at the begining of this merged chunk
+			// restart at the beginning of this merged chunk
 			nstart := start
 			for nstart -= up; nstart-1 >= 0 && change[nstart-1]; nstart-- {
 			}
@@ -2289,7 +2289,7 @@ func job_queue_finish() {
 	}
 }
 
-// Initialise job queues
+// Initialize job queues
 func job_queue_init() {
 
 	if flag_max_goroutines > 1 {
@@ -2324,14 +2324,14 @@ func queue_diff_file(fname1, fname2 string, finfo1, finfo2 os.FileInfo) {
 	}
 }
 
-// Acquire Mutext lock on output stream
+// Acquire mutex lock on output stream
 func out_acquire_lock() {
 	if flag_max_goroutines > 1 {
 		out_lock.Lock()
 	}
 }
 
-// Release Mutext lock on output stream
+// Release mutex lock on output stream
 func out_release_lock() {
 	if flag_max_goroutines > 1 {
 		out_lock.Unlock()
