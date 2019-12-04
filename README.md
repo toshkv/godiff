@@ -1,7 +1,7 @@
 #godiff
 A File/Directory diff-like comparison tool with HTML output.
 
-This program can be use to compare files and directories for differences.
+This program can be used to compare files and directories for differences.
 When comparing directories, it iterates through all files in both directories
 and compares files having the same name.
 
