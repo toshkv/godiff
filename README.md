@@ -1,4 +1,4 @@
-#godiff
+**godiff**
 A File/Directory diff-like comparison tool with HTML output.
 
 This program can be used to compare files and directories for differences.
@@ -7,21 +7,21 @@ and compares files having the same name.
 
 See example output [here:](http://raw.githack.com/spcau/godiff/master/example.html)
 
-##How to use godiff
+**How to use godiff**
 
 	godiff file1 file2 > results.html
 	godiff directory1 directory2 > results.html
 
 See `godiff -h` for all the available command line options
 
-##Features
+**Features**
 
 * When comparing two directories, place all the differences into a single html file.
 * Supports UTF8 file.
 * Show differences within a line.
 * Options for ignore case, white spaces compare, blank lines etc.
 
-##Description
+**Description**
 
 I need a program to compare 2 directories, and report differences in all
 files. Much like gnudiff, but with a nicer output. And I also like to try out
@@ -34,12 +34,12 @@ by Eugene Myers Algorithmica Vol. 1 No. 2, 1986, p 251.
 __godiff__ always tries to produce the minimal differences, 
 just like gnudiff with the "-d" option.
 
-##Go Language
+**Go Language**
 
 This program is created in the go programming language.
 For more information about _go_, see [golang.org](http://golang.org)
 
-##How to Build
+**How to Build**
 
 On Linux or Darwin OS
 
